@@ -13,7 +13,7 @@ include('header.php');
 ?>
 	<div class="container">
                 <?php
-                    $getdishes = "SELECT dishes.name, dishes.cost FROM category JOIN dishes on category.id = dishes.category_id WHERE category.name = '$category';";
+                    $getdishes = "SELECT dishes.name, dishes.cost, dishes.image FROM category JOIN dishes on category.id = dishes.category_id WHERE category.name = '$category';";
                     $result2 = $link->query($getdishes);
                     if ($result2->num_rows > 0) {
                         $column_num = 3;
@@ -30,7 +30,7 @@ include('header.php');
                 ?>
                                 <div class="col-md-4">
                                 <div class="card mb-4 shadow-sm" style="margin:0px 10px 10px 5px;">
-                                    <img class="card-img-top" src="Assets/Picture/beverage/Bourbon Fig.png" alt="avatar" >
+                                    <img class="card-img-top" src="<?php if($row['image'] != ""){ echo $row['image']; } else { echo "./Assets/Picture/default.jpg"; } ?>" alt="avatar" >
                                     <div class="card-body">
                                         <h4 class="card-title text-dark"><?php echo $row['name'];?></h4>
                                         <p class="card-text text-dark" ><?php echo $row['cost'];?></p>

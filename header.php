@@ -7,7 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <TITLE>Street Vittles</TITLE>
         <link rel="stylesheet" href="main.css">
-        <link rel="stylesheet" type="text/css" href="login.css"> 
         <link rel="stylesheet" href="Assets/bootstrap4/css/bootstrap.min.css">
     </head>
     <body>
@@ -45,13 +44,7 @@
                             if($_SESSION['username'] == "admin"){
                                 ?>
                                 <ul class="nav flex-column">
-                                    <li class="nav-item "><a class="nav-link <?php if($category == "ADD" ) echo "active"; ?>" href="add.php"><?php echo "ADD";?></a></li>
-                                </ul>
-                                <ul class="nav flex-column">
-                                    <li class="nav-item "><a class="nav-link <?php ?>" href="update.php"><?php echo "UPDATE";?></a></li>
-                                </ul>
-                                <ul class="nav flex-column">
-                                    <li class="nav-item "><a class="nav-link <?php ?>" href="delete.php"><?php echo "DELETE";?></a></li>
+                                    <li class="nav-item "><a class="nav-link <?php if($category == "Manage" ) echo "active"; ?>" href="manage.php"><?php echo "Manage";?></a></li>
                                 </ul>
                                 <?php
                             }
@@ -65,7 +58,20 @@
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                             <h1 class="h2"><?php  echo $category; ?></h1>
                         </div>
-                        <span class="h6"></span>
+                        <?php if(isset($_SESSION['status'])){
+                            ?>
+                            <div class="alert alert-success">
+                                <strong>Success!</strong> <?php echo $_SESSION['status'];?>
+                            </div>
+                            <?php unset($_SESSION['status']); 
+                        }?>
+                        <?php if(isset($_SESSION['statusF'])){
+                            ?>
+                            <div class="alert alert-danger">
+                                <strong>Failed!</strong> <?php echo $_SESSION['statusF'];?>
+                            </div>
+                            <?php unset($_SESSION['statusF']); 
+                        }?>
                     </div>
 
                     <div class="mb-3 pt-3 pb-2">
