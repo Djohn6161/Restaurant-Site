@@ -1,0 +1,129 @@
+body {
+    font-size: .875rem;
+    background: url("Assets/Picture/bg.jpg") no-repeat fixed center;
+    background-size: cover; 
+}
+
+/* Login Page */
+.login{  
+  width: 40%;  
+  overflow: hidden;  
+  margin: 40px auto;
+  padding: 80px;  
+  background-color:rgba(255, 255, 255);
+  border-radius: 15px;
+  box-shadow: 4px 2px 10px black;
+    
+}  
+.login-header {  
+text-align: center;  
+color: black;  
+} 
+.submit{
+align-items: center;
+}
+.inputs {
+color: gray;
+}
+
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 48px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(92vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+    .sidebar-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+}
+
+.sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: rgb(245, 245, 245);
+}
+
+.sidebar .nav-link.active {
+    color: #007bff;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+    color: inherit;
+}
+.nav-link:hover{
+  color: #007bff;
+}
+.sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+.active {
+  color: blue;
+}
+/*
+ * Content
+ */
+
+main {
+    padding-top: 48px; /* Space for fixed navbar */
+    padding-bottom: 48px; /* Space for footer */
+    background-color: rgba(0, 0, 0, 0.376);
+
+}
+
+/*
+ * Navbar
+ */
+
+.navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar-organizer {
+    padding: .75rem;
+    padding-left: 1.5rem;
+    color: #fff;
+}
+
+.navbar .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+}
+
+/*
+ * Card
+ */
+.card-title {
+    white-space: normal;
+}
+
+/* Credit to https://epicbootstrap.com/snippets/footer-basic */
