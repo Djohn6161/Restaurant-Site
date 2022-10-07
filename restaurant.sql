@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2022 at 02:19 PM
+-- Generation Time: Oct 07, 2022 at 02:45 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -52,29 +52,33 @@ CREATE TABLE `dishes` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `cost` double NOT NULL,
-  `category_id` int(11) NOT NULL
+  `category_id` int(11) NOT NULL,
+  `image` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `dishes`
 --
 
-INSERT INTO `dishes` (`id`, `name`, `cost`, `category_id`) VALUES
-(1, 'Beef Kaldereta', 49.99, 3),
-(2, 'Bulalo', 69.99, 3),
-(3, 'Clam Toast with Pancetta', 49.99, 3),
-(4, 'Crockpot Chicken and Dumplings', 75.99, 3),
-(5, 'Grilled Garlic and Black Pepper Shrimp', 65.99, 3),
-(6, 'Easy Buffalo Chicken Enchiladas with Celery', 89.99, 3),
-(7, 'Bourbon Fig', 24.99, 2),
-(8, 'Ginger Fizz', 19.99, 2),
-(9, 'Pan Thandai', 14.99, 2),
-(10, 'Nutriboost Smoothie', 17.99, 2),
-(11, 'Rose & Arrak Mastani', 12.99, 2),
-(12, 'Irish Coffee', 9.99, 2),
-(13, 'Berry Rhubarb', 29.99, 1),
-(14, 'Chocolate Chess Pie', 39.99, 1),
-(15, 'Cookie Butter Pie', 34.99, 1);
+INSERT INTO `dishes` (`id`, `name`, `cost`, `category_id`, `image`) VALUES
+(1, 'Beef Kaldereta', 49.99, 3, ''),
+(2, 'Bulalo', 69.99, 3, ''),
+(3, 'Clam Toast with Pancetta', 49.99, 3, ''),
+(4, 'Crockpot Chicken and Dumplings', 75.99, 3, ''),
+(5, 'Grilled Garlic and Black Pepper Shrimp', 65.99, 3, ''),
+(6, 'Easy Buffalo Chicken Enchiladas with Celery', 89.99, 3, ''),
+(7, 'Bourbon Fig', 24.99, 2, ''),
+(8, 'Ginger Fizz', 19.99, 2, ''),
+(9, 'Pan Thandai', 14.99, 2, ''),
+(10, 'Nutriboost Smoothie', 17.99, 2, ''),
+(11, 'Rose & Arrak Mastani', 12.99, 2, ''),
+(12, 'Irish Coffee', 9.99, 2, ''),
+(13, 'Berry Rhubarb', 29.99, 1, ''),
+(14, 'Chocolate Chess Pie', 39.99, 1, ''),
+(15, 'Cookie Butter Pie', 34.99, 1, ''),
+(21, 'WorldSkills Conference 20192', 21312, 2, ''),
+(24, 'adfasdfas', 234, 2, ''),
+(25, 'adfasdf', 231, 2, './Assets/Uploadedimg/96834e02e8b1b842a27309d37fc7b5a3Strawberry Margarita.png');
 
 -- --------------------------------------------------------
 
@@ -155,7 +159,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `dishes`
 --
 ALTER TABLE `dishes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `orders`
