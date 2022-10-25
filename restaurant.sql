@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2022 at 04:13 PM
+-- Generation Time: Oct 25, 2022 at 06:43 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -61,22 +61,20 @@ CREATE TABLE `dishes` (
 --
 
 INSERT INTO `dishes` (`id`, `name`, `cost`, `category_id`, `image`) VALUES
-(1, 'Beef Kaldereta', 49.99, 3, ''),
-(2, 'Bulalo', 69.99, 3, ''),
-(3, 'Clam Toast with Pancetta', 49.99, 3, ''),
-(4, 'Crockpot Chicken and Dumplings', 75.99, 3, ''),
-(5, 'Grilled Garlic and Black Pepper Shrimp', 65.99, 3, ''),
-(6, 'Easy Buffalo Chicken Enchiladas with Celery', 89.99, 3, ''),
-(7, 'Bourbon Fig', 24.99, 2, ''),
-(8, 'Ginger Fizz', 19.99, 2, ''),
-(9, 'Pan Thandai', 14.99, 2, ''),
-(10, 'Nutriboost Smoothie', 17.99, 2, ''),
-(11, 'Rose & Arrak Mastani', 12.99, 2, ''),
-(12, 'Irish Coffee', 9.99, 2, ''),
-(14, 'Chocolate Chess Pie', 39.99, 1, ''),
-(15, 'Cookie Butter Pie', 34.99, 1, ''),
-(21, 'WorldSkills Conference 20192', 21312, 2, ''),
-(40, 'Testing12', 1234, 1, '');
+(1, 'Beef Kaldereta', 49.99, 1, './Assets/Uploadedimg/237581a8375949c6b6c9e8525e7a8663Beef Kaldereta.png'),
+(2, 'Bulalo', 69.99, 1, './Assets/Uploadedimg/c0309d7fca840851ae382f857d34bbb0Bulalo.png'),
+(3, 'Clam Toast with Pancetta', 49.99, 1, './Assets/Uploadedimg/b8481fbfe4d933862eb973bf392fdfadClam Toasts with Pancetta.png'),
+(4, 'Crockpot Chicken and Dumplings', 75.99, 1, './Assets/Uploadedimg/3c0da934e576f521c097fbd2b7d296a2Crockpot Chicken and Dumplings.png'),
+(5, 'Grilled Garlic and Black Pepper Shrimp', 65.99, 1, './Assets/Uploadedimg/39ab378b2dd1651a3191eb353c62409cGrilled Garlic-and-Black Pepper Shrimp.png'),
+(6, 'Easy Buffalo Chicken Enchiladas with Celery', 89.99, 1, './Assets/Uploadedimg/8677ba8afb8e3e8c680612d9f4e78f7bEasy Buffalo Chicken Enchiladas with Celery Salsa.png'),
+(7, 'Bourbon Fig', 24.99, 2, './Assets/Uploadedimg/aa83d34a979e618676dcb93c93ecd490Bourbon Fig.png'),
+(8, 'Ginger Fizz', 19.99, 2, './Assets/Uploadedimg/75fbd44526a35fa8ed0f86a4114e3786Ginger Fizz.png'),
+(9, 'Pan Thandai', 14.99, 2, './Assets/Uploadedimg/42e434fd250b3782bf61b606a0a78fefPan Thandai.png'),
+(10, 'Nutriboost Smoothie', 17.99, 2, './Assets/Uploadedimg/9d32a581a2e8c93b55da0d207ad962a3Nutriboost Smoothie.png'),
+(11, 'Rose & Arrak Mastani', 12.99, 2, './Assets/Uploadedimg/075816d3aabb0aede4473785a55b25c9Rose & Arrak Mastani.png'),
+(12, 'Irish Coffee', 9.99, 2, './Assets/Uploadedimg/1922e1a0b8667afb3d7f02a7e1b35cf6Irish Coffee.png'),
+(14, 'Chocolate Chess Pie', 39.99, 3, './Assets/Uploadedimg/87c4634f2552fe2e1a31e131975cedadChocolateChessPie.png'),
+(15, 'Cookie Butter Pie', 34.99, 3, './Assets/Uploadedimg/3c56fce47ed6e1380b2f46429dc6f960CookieButterPie.png');
 
 -- --------------------------------------------------------
 
@@ -88,9 +86,20 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `dishes_id` int(11) NOT NULL,
-  `date_ordered` date NOT NULL,
-  `date_delivered` date NOT NULL
+  `date_ordered` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_finished` datetime NOT NULL,
+  `status` enum('finished','on Progress','canceled') NOT NULL DEFAULT 'on Progress'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `dishes_id`, `date_ordered`, `date_finished`, `status`) VALUES
+(9, 2, 14, '2022-10-25 23:34:51', '2022-10-25 06:42:01', 'canceled'),
+(10, 2, 14, '2022-10-25 23:37:14', '2022-10-25 06:42:04', 'canceled'),
+(11, 2, 1, '2022-10-25 23:51:42', '2022-10-25 06:42:06', 'canceled'),
+(12, 1, 1, '2022-10-26 00:04:39', '2022-10-25 06:41:11', 'canceled');
 
 -- --------------------------------------------------------
 
@@ -163,7 +172,7 @@ ALTER TABLE `dishes`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user`
