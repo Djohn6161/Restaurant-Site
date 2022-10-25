@@ -22,6 +22,7 @@
 				$_SESSION['lastName'] = $row['lastName'];
 				$_SESSION['loggedin'] = true;
 				$_SESSION['username'] = $row['username'];
+				$_SESSION['user_id'] = $row['id'];
 					
 				header("Location: main_course.php");
 			}

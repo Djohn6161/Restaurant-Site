@@ -102,6 +102,47 @@ if(isset($_POST["deleteData"])){
             $_SESSION['statusF'] = "Deletion Failed";
             echo '<script> alert("Data Not Deleted '. $query .'"); </script>';
         }
-
+}
+if(isset($_POST["orderDish"])){
+    $dishID = $_POST["dish_id"];
+    $userID = $_SESSION["user_id"];
+    $directory = $_SESSION['location'];
+    $insertDish = "INSERT INTO orders(user_id, dishes_id) VALUES ('$userID', '$dishID')";
+    $query_run = mysqli_query($link, $insertDish);
+    if($query_run){
+    $_SESSION['status'] = "Ordered successfully";
+        header('Location: ' . $directory);
+    }else {
+        $_SESSION['statusF'] = "Order Failed";
+        echo '<script> alert("Order failed '. $insertDish .'"); </script>';
+    }
+}
+if(isset($_POST["finishOrder"])){
+    $orderID = $_POST["order_id"];
+    $directory = $_SESSION['location'];
+    $date = date("Y-m-d h:i:s");
+    $updateOrder = "UPDATE orders SET date_finished='$date', status='finished' WHERE id='$orderID'";
+    $query_run = mysqli_query($link, $updateOrder);
+    if($query_run){
+    $_SESSION['status'] = "order successful";
+        header('Location: '. $directory);
+    }else {
+        $_SESSION['statusF'] = "order Failed";
+        echo '<script> alert("Order failed '. $updateOrder .'"); </script>';
+    }
+}
+if(isset($_POST["cancelOrder"])){
+    $orderID = $_POST["order_id"];
+    $directory = $_SESSION['location'];
+    $date = date("Y-m-d h:i:s");
+    $updateOrder = "UPDATE orders SET date_finished='$date', status='canceled' WHERE id='$orderID'";
+    $query_run = mysqli_query($link, $updateOrder);
+    if($query_run){
+    $_SESSION['status'] = "Successful";
+        header('Location: '. $directory);
+    }else {
+        $_SESSION['statusF'] = "order Failed";
+        echo '<script> alert("Order failed '. $updateOrder .'"); </script>';
+    }
 }
 ?>

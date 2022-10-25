@@ -113,11 +113,12 @@ include('header.php');
                         }
                     }
                 ?>
-                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Modal for delete confirmation -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title text-danger text-center" id="exampleModalLabel">Delete Dish</h5>
+                            <h5 class="modal-title text-danger text-center" id="deleteModal">Delete Dish</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -135,30 +136,21 @@ include('header.php');
                         </div>
                     </div>
                 </div>
-<script>
-        $(document).ready(function(){
-            $('.dishId').hide();
-            $('.deletebtn').on('click', function(){
-                $('#deleteModal').modal('show');
-                
-                $card = $(this).closest('.card-body');
-                var data = $card.children("p").map(function(){
-                    return $(this).text();
-                }).get();
-                $('#delete_id').val(data[0]);
-                console.log(data[0]);
-                // $tr = $(this).closest('tr');
-                
-                // var data = $tr.children("td").map(function(){
-                //     return $(this).text();
-                // }).get();
-
-                // console.log(data);
-
-                // $('#delete_id').val(data[0]);
-            });
-        });
-    </script>
+        <script>
+                $(document).ready(function(){
+                    $('.dishId').hide();
+                    $('.deletebtn').on('click', function(){
+                        $('#deleteModal').modal('show');
+                        
+                        $card = $(this).closest('.card-body');
+                        var data = $card.children("p").map(function(){
+                            return $(this).text();
+                        }).get();
+                        $('#delete_id').val(data[0]);
+                        console.log(data[0]);
+                    });
+                });
+        </script>
         
 <?php
 include("footer.php");

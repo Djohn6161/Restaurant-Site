@@ -33,27 +33,27 @@
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                         <span><?php echo "Menus";?></span>
                     </h6>
+                        <ul class="nav flex-column">
+
                         <?php
                                 $getCategories = "SELECT * FROM category";
                                 $result = $link->query($getCategories);
                                 if ($result->num_rows > 0) {
                                     while($row = $result->fetch_assoc()) {
                         ?>
-                        <ul class="nav flex-column">
                             <li class="nav-item "><a class="nav-link <?php if($category == $row['name']) echo 'active'; ?>" href="<?php echo $row['location'];?>"><?php echo $row['name'];?></a></li>
-                        </ul>
                         <?php
                                     }
                                 }
                             if($_SESSION['username'] == "admin"){
                                 ?>
-                                <ul class="nav flex-column">
                                     <li class="nav-item "><a class="nav-link <?php if($category == "Manage" ) echo "active"; ?>" href="manage.php"><?php echo "Manage";?></a></li>
-                                </ul>
                                 <?php
                             }
+                            
                         ?>
-
+                                <li class="nav-item "><a class="nav-link" href="order.php"><?php echo "Orders";?></a></li>
+                        </ul>
                     </div>
                 </nav>
 
