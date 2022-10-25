@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2022 at 02:45 PM
+-- Generation Time: Oct 25, 2022 at 04:13 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -73,12 +73,10 @@ INSERT INTO `dishes` (`id`, `name`, `cost`, `category_id`, `image`) VALUES
 (10, 'Nutriboost Smoothie', 17.99, 2, ''),
 (11, 'Rose & Arrak Mastani', 12.99, 2, ''),
 (12, 'Irish Coffee', 9.99, 2, ''),
-(13, 'Berry Rhubarb', 29.99, 1, ''),
 (14, 'Chocolate Chess Pie', 39.99, 1, ''),
 (15, 'Cookie Butter Pie', 34.99, 1, ''),
 (21, 'WorldSkills Conference 20192', 21312, 2, ''),
-(24, 'adfasdfas', 234, 2, ''),
-(25, 'adfasdf', 231, 2, './Assets/Uploadedimg/96834e02e8b1b842a27309d37fc7b5a3Strawberry Margarita.png');
+(40, 'Testing12', 1234, 1, '');
 
 -- --------------------------------------------------------
 
@@ -159,7 +157,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `dishes`
 --
 ALTER TABLE `dishes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `orders`
