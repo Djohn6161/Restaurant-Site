@@ -8,6 +8,7 @@
         <TITLE>Street Vittles</TITLE>
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="Assets/bootstrap4/css/bootstrap.min.css">
+        <script src="Assets/jquery-3.6.1.js"></script>
     </head>
     <body>
         <?php
@@ -29,6 +30,9 @@
             <div class="row">
                 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                     <div class="sidebar-sticky">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span><?php echo "Menus";?></span>
+                    </h6>
                         <?php
                                 $getCategories = "SELECT * FROM category";
                                 $result = $link->query($getCategories);
@@ -55,6 +59,7 @@
 
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 text-light">
                     <div class="border-bottom mb-3 pt-3 pb-2">
+                    
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                             <h1 class="h2"><?php  echo $category; ?></h1>
                         </div>

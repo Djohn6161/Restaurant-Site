@@ -9,7 +9,7 @@
     <!-- Copyright -->
 
     </footer> 
-    <script src="Assets/jquery-3.6.1.js"></script>
+    
     <script src="Assets/bootstrap4/js/bootstrap.bundle.min.js"></script> 
 </body>
 

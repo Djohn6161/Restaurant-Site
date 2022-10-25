@@ -5,54 +5,19 @@ require_once "config/database.php";
 $_SESSION['location'] = 'admin';
 $category = "Manage";
 $categoryID = 0;
-
+$image = "";
 if(!isset($_SESSION["loggedin"]) && $_SESSION['username'] == "admin"){
     header("location: index.php");
     exit;
 }
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    if(empty($_POST["name"])){
-        $name_err = "Name is required.";
-        $name = $_POST["name"];
-    } else {
-        $name = $_POST["name"];
-        $name_err = "";
-    }
-    if(empty($_POST["cost"])){
-        $cost_err = "Cost is required.";
-        $cost = $_POST["cost"];
-    } else {
-        $cost = $_POST["cost"];
-        $cost_err = "";
-    }
-    $categoryID = $_POST["category"];
-    if(empty($name_err) && empty($cost_err)){
-        
-        $v1=rand(1111,9999);
-        $v2=rand(1111,9999);
-        $v3=$v1.$v2;
-        $v3=md5($v3);
-        $fnm = $_FILES["fileToUpload"]["name"];
-        print_r($fnm);
-        $dst="./Assets/Uploadedimg/".$v3.$fnm;
-        $dst1="./Assets/Uploadedimg/".$v3.$fnm;
-        $insertDish = "INSERT INTO dishes(name, cost, category_id, image) VALUES ('$name', '$cost', '$categoryID', '$dst1')";
-        move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$dst);
-        if ($link->query($insertDish) === TRUE) {
-            $_SESSION['status'] = "New Dish created successfully";
-           
-          } else {
-            $_SESSION['statusF'] = "New Dish not created";
-          }
-    }
-}
+
 include('header.php');
 ?>      <div class="formContainer card bg-light text-dark">
-            <h2 class="formHeader"> <?php echo "Add Dish"; ?></h2>
-            <form class="needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
+            <h2 class="formHeader"> <?php echo "ADD DISH"; ?></h2>
+            <form class="needs-validation" novalidate action="action.php" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-12 mb-3">
-                        <label for="inpuName">Name</label>
+                        <label for="inpuName"></label>
                         <!-- adding the class is-invalid to the input, shows the invalid feedback below -->
                         <input type="text" class="form-control <?php if(!empty($name_err)){ echo 'is-invalid';} ?>" id="inputName" name="name" placeholder="" value="<?php if(!empty($name)){ echo $name;} ?>">
                         <div class="invalid-feedback">
@@ -99,7 +64,7 @@ include('header.php');
                 
                 <hr class="mb-4">
                 <div class="float-right" >
-                    <button class="btn btn-primary" type="submit">Save session</button>
+                    <button class="btn btn-primary" name="insertData" type="submit">ADD</button>
                 </div>
                 
             </form>
@@ -109,7 +74,7 @@ include('header.php');
         </div>
         <div class="container">
                 <?php
-                    $getdishes = "SELECT dishes.name, dishes.cost, dishes.image FROM category JOIN dishes on category.id = dishes.category_id ORDER BY category_id";
+                    $getdishes = "SELECT dishes.id, dishes.name, dishes.cost, dishes.image FROM category JOIN dishes on category.id = dishes.category_id ORDER BY category_id";
                     $result2 = $link->query($getdishes);
                     if ($result2->num_rows > 0) {
                         $column_num = 3;
@@ -128,14 +93,15 @@ include('header.php');
                                 <div class="card mb-4 shadow-sm" style="margin:0px 10px 10px 5px;">
                                     <img class="card-img-top" src="<?php if($row['image'] != ""){ echo $row['image']; } else { echo "./Assets/Picture/default.jpg"; } ?>" alt="avatar" >
                                     <div class="card-body">
+                                        <p class="dishId"> <?php echo $row['id']; ?></p>
                                         <h4 class="card-title text-dark"><?php echo $row['name'];?></h4>
                                         <p class="card-text text-dark" ><?php echo $row['cost'];?></p>
-                                        <button type="button" class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#deleteModal">
+                                        <button type="button" class="btn btn-outline-danger float-right deletebtn">
                                             Delete
                                         </button>
-                                        <button type="button" class="mr-3 btn btn-outline-warning float-right" data-toggle="modal" data-target="#editModal">
+                                        <a href="edit.php?id=<?php echo $row['id']; ?>"  type="button" class="mr-3 btn btn-outline-warning float-right">
                                             Edit
-                                        </button>
+                                        </a>
                                         
                                     </div>
                                 </div>
@@ -147,33 +113,52 @@ include('header.php');
                         }
                     }
                 ?>
-                <!-- The Modal -->
-                <div class="modal text-dark" id="editModal">
-                    <div class="modal-dialog">
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
-
-                        <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Modal Heading</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h5 class="modal-title text-danger text-center" id="exampleModalLabel">Delete Dish</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            Modal body..
-                        </div>
-
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        </div>
-
+                            <form action="action.php" method="POST">
+                                <div class="modal-body">
+                                    <input type="hidden" name="delete_id" id="delete_id" >
+                                    <h4 class="text-dark">Do you want to delete this Dish? </h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">NO</button>
+                                    <button type="submit" name="deleteData" class="btn btn-outline-danger">YES</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            
+<script>
+        $(document).ready(function(){
+            $('.dishId').hide();
+            $('.deletebtn').on('click', function(){
+                $('#deleteModal').modal('show');
+                
+                $card = $(this).closest('.card-body');
+                var data = $card.children("p").map(function(){
+                    return $(this).text();
+                }).get();
+                $('#delete_id').val(data[0]);
+                console.log(data[0]);
+                // $tr = $(this).closest('tr');
+                
+                // var data = $tr.children("td").map(function(){
+                //     return $(this).text();
+                // }).get();
 
+                // console.log(data);
+
+                // $('#delete_id').val(data[0]);
+            });
+        });
+    </script>
         
 <?php
 include("footer.php");
